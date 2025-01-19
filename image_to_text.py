@@ -29,10 +29,12 @@ def process_images_with_prompt(model_path, image_paths, prompt, max_tokens=5000,
     config = load_config(model_path)
 
     # チャットテンプレートを適用
-    prompt = codecs.decode(prompt, "unicode_escape")
+    #prompt = codecs.decode(prompt, "unicode_escape")
+    #print(prompt)
     formatted_prompt = apply_chat_template(
         processor, config, prompt, num_images=len(image_paths)
     )
+    print(formatted_prompt)
     # 出力を生成
     output = generate(model=model, processor=processor, prompt=formatted_prompt, image=image_paths, max_tokens=max_tokens, temp=temp, verbose=False)
     
