@@ -1,0 +1,1 @@
+エラーが発生しました: module 'mylib' has no attribute 'write_text_file'
