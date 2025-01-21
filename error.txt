@@ -1,1 +1,4 @@
 エラーが発生しました: module 'mylib' has no attribute 'write_text_file'
+エラーが発生しました: name 'pat' is not defined
+エラーが発生しました: resize_image_with_aspect_ratio() missing 1 required positional argument: 'dpi'
+エラーが発生しました: module 'pdf_to_image' has no attribute 'resize_image_with_aspect_ratio'
