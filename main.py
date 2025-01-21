@@ -4,17 +4,14 @@ import image_to_text
 
 # 学生の解答用紙ファイルのディレクトリ設定
 dir_students = './student_answers'
-# pdfファイルをから画像を抽出
 #mylib.repeat_func_in_dir(dir_students, ".pdf", pdf_to_jpg.convert_pdf_to_jpg)
+# ScanSnapで取り込んだpdfファイルから画像を抽出
 mylib.repeat_func_in_dir(dir_students, ".pdf", lambda path: pdf_to_image.extract_images_from_pdf(path, dir_students))
-#new_size = (362, 512)
-#new_size = (543, 768)
 #new_size = (724, 1024)
 new_size = (1448, 2048) #4分くらい
 #new_size = (1810, 2560) #メモリオーバー
-#new_size = (2171, 3072)
 dpi = (96.012, 96.012)
-mylib.repeat_func_in_dir(dir_students, ".png", lambda path: pdf_to_image.resize_image(path, path, new_size, dpi))
+#mylib.repeat_func_in_dir(dir_students, ".png", lambda path: pdf_to_image.resize_image(path, path, new_size, dpi))
 
 
 # 画像からテキストを抽出
