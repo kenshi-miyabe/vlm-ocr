@@ -147,7 +147,8 @@ if __name__ == "__main__":
     #path = "./student_answers/20250121.pdf"
     #extract_images_from_pdf(path, dir)
 
-    input_path = "./student_answers/20250121_page1_image1_2.png"
-    output_path = "./student_answers/20250121_page1_image1_2_small.png"
-    max_pixels = 28 * 28 * 1280
+    input_path = "./student_answers/20250121_page1_image1_1.png"
+    output_path = "./student_answers/20250121_page1_image1_1_small.png"
+#    max_pixels = 28 * 28 * 1280
+    max_pixels = 28 * 28 * 512
     resize_image_with_aspect_ratio(input_path, output_path, max_pixels, dpi=72)

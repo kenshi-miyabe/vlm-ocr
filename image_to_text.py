@@ -9,7 +9,7 @@ from mlx_vlm.utils import generate, get_model_path, load, load_config, load_imag
 import ollama
 
 # 画像ファイルをテキストに変換する関数
-def process_images_with_prompt(model_path, image_paths, prompt, max_tokens=5000, temp=0):
+def process_images_with_prompt(model_path, image_paths, prompt, max_tokens=500, temp=0):
     """
     モデル名、画像ファイルリスト、プロンプトを受け取り、出力テキストを返す関数。
 
@@ -40,7 +40,7 @@ def process_images_with_prompt(model_path, image_paths, prompt, max_tokens=5000,
     
     return output
 
-def process_images_with_prompt_ollama(model_path, image_paths, prompt, max_tokens, temp):
+def process_images_with_prompt_ollama(model_path, image_paths, prompt, max_tokens=500, temp=0):
     """
     モデル名、画像ファイルリスト、プロンプトを受け取り、出力テキストを返す関数。
 
@@ -90,20 +90,20 @@ def process_list(arg_list, prompt, image_path):
 
 if __name__ == "__main__":
     # モデル名、画像パス、プロンプトを設定
-#    model_info = {'model_path': "mlx-community/pixtral-12b-4bit",
-#                'model_name': "Pixtral-0",
-#                'type': "mlx",
-#                'max_tokens': 500,
-#                'temp': 0.4
-#                }
-    model_info =  {'model_path': "mlx-community/Qwen2-VL-7B-Instruct-8bit", 'model_name': "Qwen-0", 'type': "mlx", 'max_tokens': 500, 'temp': 0.4}
+    #model_info = {'model_path': "mlx-community/pixtral-12b-4bit", 'model_name': "Pixtral-0", 'type': "mlx", 'max_tokens': 500, 'temp': 0.4}
+    #model_info =  {'model_path': "mlx-community/Qwen2-VL-7B-Instruct-8bit", 'model_name': "Qwen-0", 'type': "mlx", 'max_tokens': 500, 'temp': 0.4}
+    model_info =  {'model_path': "minicpm-v", 'model_name': "minicpm-v", 'type': "ollama", 'max_tokens': 500, 'temp': 0.4}
 
-    image_paths = ["./student_answers/20250121_page1_image1_2_small.png"]
+    image_paths = ["./student_answers/20250121_page1_image1_1_small.png"]
     prompt = """
+Extract 学部(Faculty), 学科(Department), 科目(Subject), and 教員名(Teacher) from the image.
+"""
+    prompt0 = """
 Extract 年(Grade), 組(Class), 番号(Number) and 年(year), 月(Month), 日(Day) from the image.
 """
     # 関数を呼び出して結果を取得
-    output = process_images_with_prompt(model_info['model_path'], image_paths, prompt)
+    #output = process_images_with_prompt(model_info['model_path'], image_paths, prompt)
+    output = process_images_with_prompt_ollama(model_info['model_path'], image_paths, prompt)
 
     # 出力を表示
     print("出力結果:")
