@@ -12,8 +12,9 @@ dir_students = './student_answers'
 #new_size = (1810, 2560) #メモリオーバー
 #dpi = (96.012, 96.012)
 #mylib.repeat_func_in_dir(dir_students, ".png", lambda path: pdf_to_image.resize_image(path, path, new_size, dpi))
-new_size = (512, 512)
-mylib.repeat_func_in_dir(dir_students, ".png", lambda path: pdf_to_image.resize_image_with_aspect_ratio(path, path, new_size))
+#new_size = (512, 512)
+max_pixels = 28 * 28 * 1280
+mylib.repeat_func_in_dir(dir_students, ".png", lambda path: pdf_to_image.resize_image_with_aspect_ratio(path, path, max_pixels))
 
 
 # 画像からテキストを抽出

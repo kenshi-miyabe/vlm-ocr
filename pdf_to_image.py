@@ -100,17 +100,33 @@ def resize_image(input_path, output_path, new_size, dpi):
     except Exception as e:
         print(f"エラーが発生しました: {e}")
 
-def resize_image_with_aspect_ratio(input_image, output_image, new_size, dpi=72):
+def resize_image_with_aspect_ratio(input_path, output_path, max_pixels, dpi=72):
     try:
         # 画像を開く
         with Image.open(input_path) as img:
             print(f"元のモード: {img.mode}, サイズ: {img.size}, DPI: {img.info.get('dpi', '未指定')}")
 
+            # 元の画像サイズを取得
+            original_width, original_height = img.size
+
+            # アスペクト比を計算
+            aspect_ratio = original_width / original_height
+
+            # リサイズ後のサイズを計算
+            if original_width * original_height > max_pixels:
+                scale_factor = (max_pixels / (original_width * original_height)) ** 0.5
+                new_width = int(original_width * scale_factor)
+                new_height = int(original_height * scale_factor)
+            else:
+                new_width, new_height = original_width, original_height
+
+            new_size = (new_width, new_height)
+
             # リサイズ
-            img.thumbnail(new_size)
+            img = img.resize(new_size, Image.LANCZOS)
 
             # リサイズ後の画像を保存
-            img.save(output_path, dpi=dpi, compress_level=0, optimize=True)
+            img.save(output_path, dpi=(dpi, dpi), compress_level=0, optimize=True)
             print(f"リサイズ後の画像を保存しました: {output_path}")
             print(f"リサイズ後のモード: {img.mode}, リサイズ後のサイズ: {img.size}, DPI: {dpi}")
 
@@ -127,6 +143,11 @@ def resize_image_with_aspect_ratio(input_image, output_image, new_size, dpi=72):
 
 if __name__ == "__main__":
     #input_file = input("PDFファイル名を入力してください：")
-    dir = "./student_answers/"
-    path = "./student_answers/20250115a.pdf"
-    extract_images_from_pdf(path, dir)
+    #dir = "./student_answers/"
+    #path = "./student_answers/20250121.pdf"
+    #extract_images_from_pdf(path, dir)
+
+    input_path = "./student_answers/20250121_page1_image1_2.png"
+    output_path = "./student_answers/20250121_page1_image1_2_small.png"
+    max_pixels = 28 * 28 * 1280
+    resize_image_with_aspect_ratio(input_path, output_path, max_pixels, dpi=72)

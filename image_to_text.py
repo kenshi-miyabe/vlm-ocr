@@ -90,40 +90,17 @@ def process_list(arg_list, prompt, image_path):
 
 if __name__ == "__main__":
     # モデル名、画像パス、プロンプトを設定
-    model_info = {'model_path': "mlx-community/pixtral-12b-4bit",
-                'model_name': "Pixtral-0",
-                'type': "mlx",
-                'max_tokens': 5000,
-                'temp': 0.4
-                }
-    image_paths = ["./student_answers/158R228044-MINUTE-2501161538_page1.jpg"]
+#    model_info = {'model_path': "mlx-community/pixtral-12b-4bit",
+#                'model_name': "Pixtral-0",
+#                'type': "mlx",
+#                'max_tokens': 500,
+#                'temp': 0.4
+#                }
+    model_info =  {'model_path': "mlx-community/Qwen2-VL-7B-Instruct-8bit", 'model_name': "Qwen-0", 'type': "mlx", 'max_tokens': 500, 'temp': 0.4}
+
+    image_paths = ["./student_answers/20250121_page1_image1_2_small.png"]
     prompt = """
-Please extract all 50 answers from the main section as they are.
-
-The background is white, and the text is handwritten in black ink.
-The main section of the document consists of a grid with 50 questions, numbered from (1) to (50).
-Each question has a single-digit handwritten answer or a cross mark `X'.
-Your task is to output all 50 answers accurately in plain text directly within this response, without referencing or creating any files.
-
-First, output the points to be noted.
-Then, output the string `**Final Answer**' followed by the answers to the questions.
-Format each answer on a separate line in the following style without using TeX formatting:
-=====
-(Question number) Answer's digit
-=====
-Make sure the question number is enclosed in parentheses.
-If the answer is a cross mark or blank, replace `Answer's digit' with `X'.
-
-Example final output:
-=====
-**Final Answer**
-(1) 0
-(2) 1
-(3) 2
-(4) X
-=====
-
-Ensure the final output is in plain text format, without TeX formatting or file references.
+Extract 年(Grade), 組(Class), 番号(Number) and 年(year), 月(Month), 日(Day) from the image.
 """
     # 関数を呼び出して結果を取得
     output = process_images_with_prompt(model_info['model_path'], image_paths, prompt)
