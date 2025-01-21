@@ -6,12 +6,14 @@ import image_to_text
 dir_students = './student_answers'
 #mylib.repeat_func_in_dir(dir_students, ".pdf", pdf_to_jpg.convert_pdf_to_jpg)
 # ScanSnapで取り込んだpdfファイルから画像を抽出
-mylib.repeat_func_in_dir(dir_students, ".pdf", lambda path: pdf_to_image.extract_images_from_pdf(path, dir_students))
+#mylib.repeat_func_in_dir(dir_students, ".pdf", lambda path: pdf_to_image.extract_images_from_pdf(path, dir_students))
 #new_size = (724, 1024)
-new_size = (1448, 2048) #4分くらい
+#new_size = (1448, 2048) #4分くらい
 #new_size = (1810, 2560) #メモリオーバー
-dpi = (96.012, 96.012)
+#dpi = (96.012, 96.012)
 #mylib.repeat_func_in_dir(dir_students, ".png", lambda path: pdf_to_image.resize_image(path, path, new_size, dpi))
+new_size = (512, 512)
+mylib.repeat_func_in_dir(dir_students, ".png", lambda path: pdf_to_image.resize_image_with_aspect_ratio(path, path, new_size))
 
 
 # 画像からテキストを抽出
@@ -19,9 +21,9 @@ dpi = (96.012, 96.012)
 #"""
 arg_list = [
 #    {'model_path': "mlx-community/QVQ-72B-Preview-4bit", 'model_name': "QVQ", 'type': "mlx", 'max_tokens': 15000, 'temp': 0},
-    {'model_path': "mlx-community/Qwen2-VL-72B-Instruct-4bit", 'model_name': "Qwen-72B-0", 'type': "mlx", 'max_tokens': 500, 'temp': 0.4},
+#    {'model_path': "mlx-community/Qwen2-VL-72B-Instruct-4bit", 'model_name': "Qwen-72B-0", 'type': "mlx", 'max_tokens': 500, 'temp': 0.4},
 #    {'model_path': "mlx-community/pixtral-12b-4bit", 'model_name': "Pixtral-0", 'type': "mlx", 'max_tokens': 5000, 'temp': 0.4},
-#    {'model_path': "mlx-community/Qwen2-VL-7B-Instruct-8bit", 'model_name': "Qwen-0", 'type': "mlx", 'max_tokens': 5000, 'temp': 0.4},
+    {'model_path': "mlx-community/Qwen2-VL-7B-Instruct-8bit", 'model_name': "Qwen-0", 'type': "mlx", 'max_tokens': 500, 'temp': 0.4},
 ]
 #"""
 

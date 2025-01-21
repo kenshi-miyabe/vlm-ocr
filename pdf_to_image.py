@@ -100,6 +100,23 @@ def resize_image(input_path, output_path, new_size, dpi):
     except Exception as e:
         print(f"エラーが発生しました: {e}")
 
+def resize_image_with_aspect_ratio(input_image, output_image, new_size, dpi=72):
+    try:
+        # 画像を開く
+        with Image.open(input_path) as img:
+            print(f"元のモード: {img.mode}, サイズ: {img.size}, DPI: {img.info.get('dpi', '未指定')}")
+
+            # リサイズ
+            img.thumbnail(new_size)
+
+            # リサイズ後の画像を保存
+            img.save(output_path, dpi=dpi, compress_level=0, optimize=True)
+            print(f"リサイズ後の画像を保存しました: {output_path}")
+            print(f"リサイズ後のモード: {img.mode}, リサイズ後のサイズ: {img.size}, DPI: {dpi}")
+
+    except Exception as e:
+        print(f"エラーが発生しました: {e}")
+
 # 使用例
 #input_image = "large_image.jpg"  # 入力画像パス
 #output_image = "resized_image.jpg"  # 出力画像パス
@@ -110,5 +127,6 @@ def resize_image(input_path, output_path, new_size, dpi):
 
 if __name__ == "__main__":
     #input_file = input("PDFファイル名を入力してください：")
-    input_file = "./student_answers/158R248028-MINUTE-2412031628.pdf"
-    convert_pdf_to_jpg(input_file)
+    dir = "./student_answers/"
+    path = "./student_answers/20250115a.pdf"
+    extract_images_from_pdf(path, dir)
